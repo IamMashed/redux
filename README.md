@@ -380,17 +380,8 @@ $ sudo apt-get install chromium-browser
 ```
 
 ## License
-All rights reseved by the rightful owner of the project.
+apache 2.0
 
-## CONFIDENTIALITY NOTICE
-The contents of this repository are intended solely for the authorized project contributors
-and the key stakeholders of the project. The content of this project  may contain confidential 
-and/or privileged information and may be legally protected from
-disclosure. If you are not the intended recipient of this intellectual property or their agent, or
-you received this property in error, please immediately alert the repository owner and then delete
-any copies you may posses. If you are not the intended recipient, you are hereby
-notified that any use, dissemination, copying, or storage of this intellectual property is
-strictly prohibited. 
 
 
 
