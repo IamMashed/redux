@@ -1,0 +1,18 @@
+{% extends "includes/with_navigation.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block page_title %}
+<h1>Single CMA</h1>
+{% endblock %}
+
+{% block content %}
+<div>
+  Below is a randomly selected property from Nassau county. For testing purposes.
+</div>
+<div>
+  <a href='{{ random_property.id }}'>{{ random_property.address }}</a>
+</div>
+{% endblock %}
+
+

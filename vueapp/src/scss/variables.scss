@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&display=swap');
+
+$body-font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI","Roboto","Oxygen", "Ubuntu","Cantarell","Fira Sans","Droid Sans", "Helvetica Neue",sans-serif;
+
+$dark: #151B26 !default;
+
+$material-light: (
+	'background': #F6F8F9,
+	'text': (
+	  'primary': $dark,
+	  'secondary': $dark,
+	),
+	'dividers': #e8ecee,
+	'input-bottom-line': #6f7782,
+	'text-fields': (
+		'outlined': #9ca6af,
+	),
+);
+
+$btn-sizes: (
+	'x-small': 20,
+	'small': 26,
+	'default': 32,
+	'large': 44,
+	'x-large': 52,
+);
+
+$btn-font-sizes: (
+    'default': 1rem,
+);
+
+$data-table-regular-header-height: 48px !default;
+$data-table-dense-header-height: 24px !default;
+
+$img-preload-filter: none !default;
+
+$sheet-outlined-border-width: 3px !default;
+
+$card-border-radius: 10px !default;
+$card-title-letter-spacing: none !default;
+$card-title-font-size: 1.375em !default;
+$card-title-font-weight: 900 !default;
+$card-title-line-height: 1.32 !default;
+$card-subtitle-padding: .4em .5em;
+
+$dialog-border-radius: 10px !default;
+$dialog-card-title-font-size: 1.375em !default;
+$dialog-card-title-padding: 6px 20px !default;
+$dialog-card-title-font-weight: bold !default;
+$dialog-card-title-letter-spacing: none !default;
+
+$btn-text-color: #6F7782 !default;
+$btn-font-weight: bold !default;
+$btn-text-transform: none !default;
+$btn-letter-spacing: none !default;
+
+$label-font-size: 14px !default;
+
+$text-field-filled-full-width-outlined-single-line-slot-min-height: 32px;
+$text-field-label-active-transform: translateY(-20px) !default;
+$text-field-padding: 3px 0 2px !default;
+$text-field-append-prepend-margin: 0px;
+$text-field-outlined-prepend-append-margin-top: 4px;
+
+$select-dense-selections-margin: 3px 4px 3px 0 !default;
+$select-outlined-dense-selections-padding-top: 0 0 !default;
+
+$tab-font-size: 1.375em;
+$tabs-item-letter-spacing: 0;
+$tab-font-weight: 400;
+
+$stepper-alt-labels-flex-basis: 0 !default;
+$stepper-alt-labels-header-divider: 35px -24px 0 !default;

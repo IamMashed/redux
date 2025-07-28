@@ -1,0 +1,247 @@
+{% extends "includes/with_navigation.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block title %}List Rule Sets{% endblock %}
+
+{% block page_title %}
+    <h1>Rule Sets</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="row" style="height: calc(100% - 100px);"> <!--Filters & Content Area-->
+        <div id="myDIV" class="col-md-3 dashboard-filters" style="height: 100%;">
+
+            <h2>Filters</h2>
+
+            {{ wtf.quick_form(form) }}
+
+        </div>
+
+
+        <div class="col-md-9 dashboard-data" id="tableDIV" style="background-color: #ffffff;">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>Existing Rule Sets</h2>
+                    <input type="button" onclick="myFunction()" style="margin-left: -50px !important;"
+                           class="toggle-button" value="<" id="toggleButton">
+                </div>
+                <div class="col-md-4">
+                    <span class="create-rule">
+                        <a href="{{ url_for('rule_set.create') }}">Create Rule</a></span>
+                </div>
+            </div>
+			
+			
+            <div class="row">
+	            
+                <div class="col-md-12">
+                    <div style="overflow-x: auto;" class="rule-set-table">
+                        <table class="table-hover">
+                            <tr class="top-row">
+                                <th></th>
+                                <td>#</td>
+                                <td>County</td>
+                                <td>Township</td>
+                                <td>Village</td>
+                                <td>Selection</td>
+                                <td>Inventory Adjustment</td>
+                                <td>Obsolescence Adjustment</td>
+                                <td>Actions</td>
+                            </tr>
+
+                            {% for rule in properties_rules %}
+                                <tr style="transform: rotate(0)">
+                                    <th scope="row">
+                                        <a href="{{ url_for('rule_set.edit', pr_id=rule.id) }}"
+                                           class="stretched-link"></a>
+                                    </th>
+                                    <td>{{ rule.id }}</td>
+                                    {% if rule.county %}
+                                        <td>{{ rule.county }}</td>
+                                    {% else %}
+                                        <td>All</td>
+                                    {% endif %}
+
+                                    {% if rule.town %}
+                                        <td>{{ rule.town }}</td>
+                                    {% else %}
+                                        <td>All</td>
+                                    {% endif %}
+
+                                    {% if rule.village %}
+                                        <td>{{ rule.village }}</td>
+                                    {% else %}
+                                        <td>-</td>
+                                    {% endif %}
+
+                                    {% if rule.selection_rules and not rule.selection_rules.inherits_all_from_parent() %}
+                                        <td>
+                                            <span class="add-adjustment">+</span>
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            <span class="inherit">-</span>
+                                        </td>
+                                    {% endif %}
+
+                                    {% if rule.all_inventory_rules_inherit_from_parent() %}
+                                        <td>
+                                            <span class="inherit">-</span>
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            <span class="add-adjustment">+</span>
+                                        </td>
+                                    {% endif %}
+                                    {% if rule.all_obsolescence_rules_inherit_from_parent() %}
+                                        <td>
+                                            <span class="inherit">-</span>
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            <span class="add-adjustment">+</span>
+                                        </td>
+                                    {% endif %}
+                                    </a>
+
+                                    <td>
+                                        <a title="Delete Confirmation"
+                                           href="{{ url_for('rule_set.delete_pr', pr_id=rule.id) }}"
+                                           class="stretched-link" style="position: relative; z-index: 1"
+                                           onclick="return confirm('Permanently Delete the Rule Set {{
+                                                       rule.rule_name }}?\nThere is no going back.')"
+                                        >
+                                            <img src="{{ url_for('static', filename='images/recycle-bin.png') }}">
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 inherit-key">
+                    <p><span class="inherit">-</span> inherits from a one level above generic rule</p>
+                </div>
+            </div>
+        
+
+    <script>
+        var x, i, j, selElmnt, a, b, c;
+        /*look for any elements with the class "custom-select":*/
+        x = document.getElementsByClassName("custom-select");
+        for (i = 0; i < x.length; i++) {
+            selElmnt = x[i].getElementsByTagName("select")[0];
+            /*for each element, create a new DIV that will act as the selected item:*/
+            a = document.createElement("DIV");
+            a.setAttribute("class", "select-selected");
+            a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+            x[i].appendChild(a);
+            /*for each element, create a new DIV that will contain the option list:*/
+            b = document.createElement("DIV");
+            b.setAttribute("class", "select-items select-hide");
+            for (j = 1; j < selElmnt.length; j++) {
+                /*for each option in the original select element,
+                create a new DIV that will act as an option item:*/
+                c = document.createElement("DIV");
+                c.innerHTML = selElmnt.options[j].innerHTML;
+                c.addEventListener("click", function (e) {
+                    /*when an item is clicked, update the original select box,
+                    and the selected item:*/
+                    var y, i, k, s, h;
+                    s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                    h = this.parentNode.previousSibling;
+                    for (i = 0; i < s.length; i++) {
+                        if (s.options[i].innerHTML == this.innerHTML) {
+                            s.selectedIndex = i;
+                            h.innerHTML = this.innerHTML;
+                            y = this.parentNode.getElementsByClassName("same-as-selected");
+                            for (k = 0; k < y.length; k++) {
+                                y[k].removeAttribute("class");
+                            }
+                            this.setAttribute("class", "same-as-selected");
+                            break;
+                        }
+                    }
+                    h.click();
+                });
+                b.appendChild(c);
+            }
+            x[i].appendChild(b);
+            a.addEventListener("click", function (e) {
+                /*when the select box is clicked, close any other select boxes,
+                and open/close the current select box:*/
+                e.stopPropagation();
+                closeAllSelect(this);
+                this.nextSibling.classList.toggle("select-hide");
+                this.classList.toggle("select-arrow-active");
+            });
+        }
+
+        function closeAllSelect(elmnt) {
+            /*a function that will close all select boxes in the document,
+            except the current select box:*/
+            var x, y, i, arrNo = [];
+            x = document.getElementsByClassName("select-items");
+            y = document.getElementsByClassName("select-selected");
+            for (i = 0; i < y.length; i++) {
+                if (elmnt == y[i]) {
+                    arrNo.push(i)
+                } else {
+                    y[i].classList.remove("select-arrow-active");
+                }
+            }
+            for (i = 0; i < x.length; i++) {
+                if (arrNo.indexOf(i)) {
+                    x[i].classList.add("select-hide");
+                }
+            }
+        }
+
+        /*if the user clicks anywhere outside the select box,
+        then close all select boxes:*/
+        document.addEventListener("click", closeAllSelect);
+    </script>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                $('#tableDIV').removeClass('col-md-12');
+                $('#tableDIV').addClass('col-md-9');
+            } else {
+                x.style.display = "none";
+                $('#tableDIV').removeClass('col-md-9');
+                $('#tableDIV').addClass('col-md-12');
+            }
+        }
+
+    </script>
+
+    <script>
+        $('#toggleButton').click(function () {
+            var self = this;
+            change(self);
+        });
+
+        function change(el) {
+            if (el.value === "<")
+                el.value = ">";
+            else
+                el.value = "<";
+        }
+    </script>
+
+
+
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='javascript/county_town_filter.js') }}"></script>
+{% endblock %}
+

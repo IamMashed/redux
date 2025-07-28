@@ -1,0 +1,622 @@
+{% extends "includes/with_navigation.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% from 'macros.html' import masscma_column %}
+
+{% block title %}Index{% endblock %}
+
+{% block page_title %}
+    <h1>Mass CMA</h1>
+    <h2 class="mass-cma-download" style="font-size:1.5rem;">
+        <img src="{{ url_for('static', filename='images/location-icon.jpg') }}">
+        <span> Nassau SBJ</span>
+    </h2>
+    {% if pagination %}
+        <div class="row">
+            <div class="col-md-12">
+                <form id="export_from_to"
+                      action="{{ url_for('masscma.download_csv') }}"
+                      method="post">
+                    <div class="mass-cma-download row pl-3">
+                        <a href="#"
+                           onclick="document.getElementById('export_from_to').submit()">
+                            Export
+                        </a>
+                        <small class="px-1">From</small>
+                        <input type="number" name="from" step="1" min="0"
+                               placeholder="0"
+                               class="col-3">
+                        <small class="px-1">To</small>
+                        <input type="number" name="to" step="1"
+                               placeholder="{{ pagination.total }}"
+                               max="{{ pagination.total }}"
+                               class="col-3">
+                        <input type="text" name="task_id" hidden value="{{ task_id }}"
+                               class="col-3">
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% with tasks = current_user.get_tasks_in_progress() %}
+        {% if tasks %}
+            {% for task in tasks %}
+                <div class="alert alert-success" role="alert">
+                    {{ task.description }}
+                    <span id="{{ task.id }}-progress">{{ task.get_progress() }}</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="row" style="height: calc(100% - 110px); background: #ffffff;"> <!--Filters & Content Area-->
+    <div id="myDIV" class="col-md-3 dashboard-filters" style="height: 100%;">
+
+        {% if current_user.can(Permission.MASS_CMA) %}
+            <hr style="height:2px;border:none;color:#1DBAB4;background-color:#1DBAB4;"/>
+            <h2>Start Mass Cma</h2>
+            {{ wtf.quick_form(form) }}
+        {% endif %}
+
+        {% if current_user.can(Permission.MASS_CMA) %}
+            <hr style="height:2px;border:none;color:#1DBAB4;background-color:#1DBAB4;"/>
+            <h2>Select Mass Cma</h2>
+            {{ wtf.quick_form(select_form) }}
+        {% endif %}
+
+        <hr style="height:2px;border:none;color:#1DBAB4;background-color:#1DBAB4;"/>
+        <h2>Filters</h2>
+        <form method="post">
+            <input id="mass_cma_filter_csrf_token" name="csrf_token" type="hidden"
+                   value="{{ csrf_token() }}">
+            {{ filter_form.county.label }}<br/>
+            {{ filter_form.county }}<br/>
+            {{ filter_form.town.label }}<br/>
+            {{ filter_form.town }}<br/>
+            {{ filter_form.village.label }}<br/>
+            {{ filter_form.village }}<br/>
+            {{ filter_form.section.label }}
+            {{ filter_form.section }}
+            {{ filter_form.block.label }}
+            {{ filter_form.block }}
+            {{ filter_form.lot.label }}
+            {{ filter_form.lot }}
+            {{ filter_form.street.label }}
+            {{ filter_form.street }}
+            {{ filter_form.number.label }}
+            {{ filter_form.number }}
+            {{ filter_form.school_district.label }}
+            {{ filter_form.school_district }}
+
+            <h3>Saving</h3>
+            {{ filter_form.saving_min }}
+            {{ filter_form.saving_max }}
+
+            {{ filter_form.subject_sale_min }}
+            {{ filter_form.subject_sale_max }}
+
+            <h3>Market Value</h3>
+            {{ filter_form.market_value_min }}
+            {{ filter_form.market_value_max }}
+
+            {{ filter_form.apply }}
+            {{ filter_form.clear }}
+        </form>
+        <hr style="height:2px;border:none;color:#1DBAB4;background-color:#1DBAB4;"/>
+    </div>
+
+    <div class="col-md-9 dashboard-data" id="tableDIV" style="background: #ffffff;">
+
+    <div class="row">
+        <div class="col-md-12">
+            <input type="button" onclick="myFunction()"
+                   style="margin-left: -50px !important; outline: none;margin-top: auto;"
+                   class="toggle-button" value="<" id="toggleButton">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div style="overflow-x: auto;height: 700px" class="mass-cma-table">
+                <table class="demo1">
+                    <thead style="background-color: #f9f9f9">
+                    <tr class="top-row">
+                        <td>&nbsp;</td>
+                        <td>{{ masscma_column('apn', 'APN', sort_info) }}</td>
+                        <td>{{ masscma_column('previos_client', 'Previous Client',
+                                               sort_info) }}</td>
+                        <td>{{ masscma_column('county_tentative_assessment',
+                                        'County Tentative Assessment', sort_info) }}</td>
+                        <td>{{ masscma_column('saving', 'Saving', sort_info) }}</td>
+                        <td>{{ masscma_column('subject_sale', 'Subject Sale', sort_info) }}</td>
+                        <td>{{ masscma_column('gd_avg_1_4', 'GD AVG 1-4', sort_info) }}</td>
+                        <td>{{ masscma_column('gd_avg_1_8', 'GD AVG 1-8', sort_info) }}</td>
+                        <td>{{ masscma_column('gd_avg_1_12', 'GD AVG 1-12', sort_info) }}</td>
+                        <td>{{ masscma_column('all_avg_1_4', 'ALL AVG 1-4', sort_info) }}</td>
+                        <td>{{ masscma_column('all_avg_1_8', 'ALL AVG 1-8', sort_info) }}</td>
+                        <td>{{ masscma_column('all_avg_1_12', 'ALL AVG 1-12', sort_info) }}</td>
+                        <td>{{ masscma_column('total_good_comps', 'Total Good Comps', sort_info) }}</td>
+                        <td>{{ masscma_column('total_comps', 'Total Comps', sort_info) }}</td>
+                        <td>{{ masscma_column('assessed_market', 'Assessed Market', sort_info) }}</td>
+                        <td>{{ masscma_column('cma_market', 'CMA Market', sort_info) }}</td>
+                        <td>{{ masscma_column('sale_price', 'Sale Price', sort_info) }}</td>
+                        <td>{{ masscma_column('sale_date', 'Sale Date', sort_info) }}</td>
+                        <td>{{ masscma_column('county', 'County', sort_info) }}</td>
+                        <td>{{ masscma_column('town', 'Town', sort_info) }}</td>
+                        <td>{{ masscma_column('street', 'Street', sort_info) }}</td>
+                        <td>{{ masscma_column('house_number', 'House Number', sort_info) }}</td>
+                        <td>{{ masscma_column('school', 'School', sort_info) }}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <a href="/vue/cma/{{ item.Property.id }}"
+                                   target="_blank" rel="noopener noreferrer">
+                                    {{ item.Property.apn }}
+                                </a>
+                            </td>
+
+                            {% if item.CmaResult.computed_cma %}
+                                <td>N</td>
+                            {% else %}
+                                <td><a href="{{ url_for('case_management.page') }}"
+                                       target="_blank" rel="noopener noreferrer">N</a></td>
+                            {% endif %}
+
+                            <td>{{ item.Assessment.assessment_value | int }}</td>
+
+                            {# Saving #}
+                            {% if item.CmaResult.computed_cma %}
+                                <td>{{ (item.Assessment.assessment_value
+                                        - item.CmaResult.computed_cma) | int }}
+                                </td>
+                            {% elif item.CmaResult.subject_sale %}
+                                <td>{{ item.CmaResult.subject_sale }}</td>
+                            {% else %}
+                                <td> -</td>
+                            {% endif %}
+
+                            {# Subject Sale #}
+                            {% if not item.CmaResult.computed_cma %}
+                                {% if item.CmaResult.subject_sale_price %}
+                                    <td>{{ item.CmaResult.subject_sale_price }}</td>
+                                {% else %}
+                                    <td> -</td>
+                                {% endif %}
+                            {% else %}
+                                <td> -</td>
+                            {% endif %}
+
+                            {% if item.CmaResult.computed_cma_good_small %}
+                                <td>{{ (item.CmaResult.computed_cma_good_small) | int }}</td>
+                            {% else %}
+                                <td> -</td>
+                            {% endif %}
+                            {% if item.CmaResult.computed_cma_good_medium %}
+                                <td>{{ (item.CmaResult.computed_cma_good_medium) | int }}</td>
+                            {% else %}
+                                <td> -</td>
+                            {% endif %}
+                            {% if item.CmaResult.computed_cma_good_high %}
+                                <td>{{ (item.CmaResult.computed_cma_good_high) | int }}</td>
+                            {% else %}
+                                <td> -</td>
+                            {% endif %}
+                            {% if item.CmaResult.computed_cma %}
+                                <td>{{ (item.CmaResult.computed_cma) | int }}</td>
+                            {% else %}
+                                <td> -</td>
+                            {% endif %}
+                            {% if item.CmaResult.computed_cma_medium %}
+                                <td>{{ (item.CmaResult.computed_cma_medium) | int }}</td>
+                            {% else %}
+                                <td> -</td>
+                            {% endif %}
+                            {% if item.CmaResult.computed_cma_high %}
+                                <td>{{ (item.CmaResult.computed_cma_high) | int }}</td>
+                            {% else %}
+                                <td> -</td>
+                            {% endif %}
+                            {% if item.CmaResult.total_good_comps %}
+                                <td>{{ (item.CmaResult.total_good_comps) | int }}</td>
+                            {% else %}
+                                <td> -</td>
+                            {% endif %}
+                            {% if item.CmaResult.total_all_comps %}
+                                <td>{{ (item.CmaResult.total_all_comps) | int }}</td>
+                            {% else %}
+                                <td> -</td>
+                            {% endif %}
+
+                            {# Assessed Market #}
+                            <td>{{ (item.Assessment.value / assessment_ratio) | int }}</td>
+
+                            {# Cma Market #}
+                            {% if item.CmaResult.computed_cma %}
+                                <td>{{ (item.CmaResult.computed_cma / assessment_ratio) | int }}</td>
+                            {% else %}
+                                <td> -</td>
+                            {% endif %}
+
+                            {% if item.Property.last_sale %}
+                                <td>{{ item.Sale.price }}</td>
+                                <td>{{ item.Sale.date }}</td>
+                            {% else %}
+                                <td> -</td>
+                                <td> -</td>
+                            {% endif %}
+
+                            <td>{{ item.Property.county }}</td>
+                            <td>{{ TOWNS[item.Property.county][item.Property.town] }}</td>
+                            <td>{{ item.Property.street }}</td>
+                            <td>{{ item.Property.number }}</td>
+                            <td>{{ item.Property.school_district }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td>-</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    {% if pagination %}
+        <div class="row">
+            <div class="col-md-12 table-pagination">
+                <ul>
+                    <li>Page</li>
+                    {% if not pagination.has_prev %}
+                        <li class="inactive-page-skip"><</li>
+                    {% else %}
+                        <li class="active-page-skip">
+                            <a href="{{ url_for('masscma.index',
+                            page=pagination.prev_num,
+                            **sort_info) }}"><</a>
+                        </li>
+                    {% endif %}
+                    {% for p in pagination.iter_pages() %}
+                        {% if p %}
+                            {% if p == pagination.page %}
+                                <li class="list-group-item-success">
+                                    <a
+                                    href="{{ url_for('masscma.index',
+                                    page = p,
+                                    **sort_info) }}">{{ p }}</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a
+                                    href="{{ url_for('masscma.index',
+                                    page = p,
+                                    **sort_info) }}">{{ p }}</a>
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            <li class="disabled"><a href="#">&hellip;</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if not pagination.has_next %}
+                        <li class="inactive-page-skip">></li>
+                    {% else %}
+                        <li class="active-page-skip">
+                            <a href="{{ url_for('masscma.index',
+                            page=pagination.next_num,
+                            **sort_info) }}">></a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+
+    <!--<div class="row">
+        <div class="col-md-12">
+            <div class="selector-buttons">
+                <div class="row">
+                      <div class="col-md-6">
+                          <button>Mark</button>
+                          <button>Stop</button>
+                          <button>Count Marked</button>
+                      </div>
+                      <div class="col-md-6 right-selector-buttons">
+                          <button>Unmark All</button>
+                          <button>Export Database</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="selector-buttons">
+                <div class="row">
+                      <div class="col-md-6">
+                          <button>Mark</button>
+                          <button>Stop</button>
+                          <button>Count Marked</button>
+                      </div>
+                      <div class="col-md-6 right-selector-buttons">
+                          <button>Unmark All</button>
+                          <button>Export Database</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+    <!--<div class="row">
+      <div class="col-md-12">
+        <div class="marking-statistics">
+          <h3>Marking Control &amp; Status</h3>
+
+          <div class="row">
+            <div class="col-sm-7">
+
+              <div class="row">
+                <div class="col-md-5 left-marking-stat-list">
+                  <ul>
+                    <li>Start From Record #:</li>
+                    <li>Records to Mark:</li>
+                  </ul>
+                </div>
+                <div class="col-md-7">
+                  <ul>
+                    <li><input type="text"></li>
+                    <li><input type="text"></li>
+                  </ul>
+                </div>
+              </div>
+
+
+                  <div class="row" style="margin-top: 30px;">
+                    <div class="col-md-5 left-marking-stat-list">
+                      <ul style="text-align: right;">
+                        <li>Scanned:</li>
+                        <li>Marked:</li>
+                        <li>Start Time:</li>
+                        <li>Elapsed Time:</li>
+                      </ul>
+                    </div>
+                    <div class="col-md-7 right-marking-stat-list">
+                      <ul>
+                        <li>Finished</li>
+                        <li>0</li>
+                        <li>11:02:04 AM</li>
+                        <li>0 Days 00 Hours 00 Minutes 00 Seconds</li>
+                      </ul>
+                    </div>
+                  </div>
+
+            </div>
+
+
+            <div class="col-sm-5 mass-parameters">
+              <p class="left-marking-stat-list">Mass Parameters</p>
+
+              <div class="row">
+                <div class="col-md-6 left-marking-stat-list">
+                  <ul>
+                    <li>Savings:</li>
+                    <li>Min. Savings:</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul>
+                    <li><input type="text"></li>
+                    <li><input type="text"></li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+          </div>
+      </div>-->
+
+    <script>
+      var x, i, j, selElmnt, a, b, c;
+      /*look for any elements with the class "custom-select":*/
+      x = document.getElementsByClassName("custom-select");
+      for (i = 0; i < x.length; i++) {
+        selElmnt = x[i].getElementsByTagName("select")[0];
+        /*for each element, create a new DIV that will act as the selected item:*/
+        a = document.createElement("DIV");
+        a.setAttribute("class", "select-selected");
+        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+        x[i].appendChild(a);
+        /*for each element, create a new DIV that will contain the option list:*/
+        b = document.createElement("DIV");
+        b.setAttribute("class", "select-items select-hide");
+        for (j = 1; j < selElmnt.length; j++) {
+          /*for each option in the original select element,
+          create a new DIV that will act as an option item:*/
+          c = document.createElement("DIV");
+          c.innerHTML = selElmnt.options[j].innerHTML;
+          c.addEventListener("click", function (e) {
+            /*when an item is clicked, update the original select box,
+            and the selected item:*/
+            var y, i, k, s, h;
+            s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+            h = this.parentNode.previousSibling;
+            for (i = 0; i < s.length; i++) {
+              if (s.options[i].innerHTML == this.innerHTML) {
+                s.selectedIndex = i;
+                h.innerHTML = this.innerHTML;
+                y = this.parentNode.getElementsByClassName("same-as-selected");
+                for (k = 0; k < y.length; k++) {
+                  y[k].removeAttribute("class");
+                }
+                this.setAttribute("class", "same-as-selected");
+                break;
+              }
+            }
+            h.click();
+          });
+          b.appendChild(c);
+        }
+        x[i].appendChild(b);
+        a.addEventListener("click", function (e) {
+          /*when the select box is clicked, close any other select boxes,
+          and open/close the current select box:*/
+          e.stopPropagation();
+          closeAllSelect(this);
+          this.nextSibling.classList.toggle("select-hide");
+          this.classList.toggle("select-arrow-active");
+        });
+      }
+
+      function closeAllSelect(elmnt) {
+        /*a function that will close all select boxes in the document,
+        except the current select box:*/
+        var x, y, i, arrNo = [];
+        x = document.getElementsByClassName("select-items");
+        y = document.getElementsByClassName("select-selected");
+        for (i = 0; i < y.length; i++) {
+          if (elmnt == y[i]) {
+            arrNo.push(i)
+          } else {
+            y[i].classList.remove("select-arrow-active");
+          }
+        }
+        for (i = 0; i < x.length; i++) {
+          if (arrNo.indexOf(i)) {
+            x[i].classList.add("select-hide");
+          }
+        }
+      }
+
+      /*if the user clicks anywhere outside the select box,
+      then close all select boxes:*/
+      document.addEventListener("click", closeAllSelect);
+    </script>
+
+    <script>
+      function myFunction() {
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+          $('#tableDIV').removeClass('col-md-12');
+          $('#tableDIV').addClass('col-md-9');
+        } else {
+          x.style.display = "none";
+          $('#tableDIV').removeClass('col-md-9');
+          $('#tableDIV').addClass('col-md-12');
+        }
+
+        reflowFloatTable()
+      }
+
+    </script>
+
+    <script>
+      $('#toggleButton').click(function () {
+        var self = this;
+        change(self);
+      });
+
+      function change(el) {
+        if (el.value === "<")
+          el.value = ">";
+        else
+          el.value = "<";
+      }
+    </script>
+
+    <script>
+      function set_task_progress(task_id, progress, remaining_time) {
+        $('#' + task_id + '-progress').text(progress + ' .Time remaining ' + remaining_time);
+      }
+
+      $(document).ready(function () {
+        {#set navbar height to the height of the page#}
+        {#$(".dashboard-navigation").height($("#myDIV").height());#}
+
+
+        var since = 0;
+        $.ajax('{{ url_for('masscma.notifications') }}?since=' + since).done(
+            function (notifications) {
+              for (var i = 0; i < notifications.length; i++) {
+                switch (notifications[i].name) {
+                  case 'task_progress':
+                    set_task_progress(
+                        notifications[i].data.task_id,
+                        notifications[i].data.progress,
+                        notifications[i].data.remaining_time,
+                    );
+                    console.log(notifications[i].data);
+                    break;
+                }
+                since = notifications[i].timestamp;
+              }
+            }
+        );
+      });
+
+      {% with tasks = current_user.get_tasks_in_progress() %}
+        {% if tasks %}
+          {% if current_user.is_authenticated %}
+            $(function () {
+              var since = 0;
+              setInterval(function () {
+                $.ajax('{{ url_for('masscma.notifications') }}?since=' + since).done(
+                    function (notifications) {
+                      for (var i = 0; i < notifications.length; i++) {
+                        switch (notifications[i].name) {
+                          case 'task_progress':
+                            set_task_progress(
+                                notifications[i].data.task_id,
+                                notifications[i].data.progress,
+                                notifications[i].data.remaining_time,
+                            );
+                            break;
+                        }
+                        since = notifications[i].timestamp;
+                        location = location.href;
+                      }
+                    }
+                );
+              }, 10000);
+            });
+          {% endif %}
+        {% endif %}
+      {% endwith %}
+    </script>
+
+    <script>
+      {#http://mkoryak.github.io/floatThead/##}
+      var $demo1 = $('table.demo1');
+      $demo1.floatThead({
+        scrollContainer: function ($table) {
+          return $table.closest('.mass-cma-table');
+        },
+        floatContainerClass: 'mass-cma-table',
+      });
+
+      function reflowFloatTable() {
+        return $demo1.trigger('reflow');
+      }
+
+    </script>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='javascript/county_town_filter.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/jquery.floatThead.min.js') }}"></script>
+{% endblock %}

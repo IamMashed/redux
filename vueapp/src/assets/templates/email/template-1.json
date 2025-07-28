@@ -1,0 +1,257 @@
+{
+    "counters": {
+        "u_column": 6,
+        "u_row": 6,
+        "u_content_heading": 2,
+        "u_content_menu": 1,
+        "u_content_text": 1,
+        "u_content_html": 1
+    },
+    "body": {
+        "rows": [
+            {
+                "cells": [
+                    1
+                ],
+                "columns": [
+                    {
+                        "contents": [
+                            {
+                                "type": "heading",
+                                "values": {
+                                    "containerPadding": "60px 10px",
+                                    "_meta": {
+                                        "htmlID": "u_content_heading_2",
+                                        "htmlClassNames": "u_content_heading"
+                                    },
+                                    "selectable": true,
+                                    "draggable": true,
+                                    "duplicatable": true,
+                                    "deletable": true,
+                                    "headingType": "h1",
+                                    "fontFamily": {
+                                        "label": "Arial",
+                                        "value": "arial,helvetica,sans-serif"
+                                    },
+                                    "fontSize": "32px",
+                                    "color": "#ffffff",
+                                    "textAlign": "center",
+                                    "lineHeight": "140%",
+                                    "linkStyle": {
+                                        "inherit": true,
+                                        "linkColor": "#0000ee",
+                                        "linkHoverColor": "#0000ee",
+                                        "linkUnderline": true,
+                                        "linkHoverUnderline": true
+                                    },
+                                    "hideDesktop": false,
+                                    "hideMobile": false,
+                                    "text": "<strong>Your application has been rejected</strong>"
+                                }
+                            }
+                        ],
+                        "values": {
+                            "backgroundColor": "",
+                            "padding": "0px",
+                            "border": {},
+                            "_meta": {
+                                "htmlID": "u_column_2",
+                                "htmlClassNames": "u_column"
+                            }
+                        }
+                    }
+                ],
+                "values": {
+                    "displayCondition": null,
+                    "columns": false,
+                    "backgroundColor": "",
+                    "columnsBackgroundColor": "#aa1f2d",
+                    "backgroundImage": {
+                        "url": "",
+                        "fullWidth": true,
+                        "repeat": false,
+                        "center": true,
+                        "cover": false
+                    },
+                    "padding": "0px",
+                    "hideDesktop": false,
+                    "hideMobile": false,
+                    "noStackMobile": false,
+                    "_meta": {
+                        "htmlID": "u_row_2",
+                        "htmlClassNames": "u_row"
+                    },
+                    "selectable": true,
+                    "draggable": true,
+                    "duplicatable": true,
+                    "deletable": true
+                }
+            },
+            {
+                "cells": [
+                    1
+                ],
+                "columns": [
+                    {
+                        "contents": [
+                            {
+                                "type": "text",
+                                "values": {
+                                    "containerPadding": "40px",
+                                    "_meta": {
+                                        "htmlID": "u_content_text_1",
+                                        "htmlClassNames": "u_content_text"
+                                    },
+                                    "selectable": true,
+                                    "draggable": true,
+                                    "duplicatable": true,
+                                    "deletable": true,
+                                    "color": "#333333",
+                                    "textAlign": "left",
+                                    "lineHeight": "140%",
+                                    "linkStyle": {
+                                        "inherit": true,
+                                        "linkColor": "#0000ee",
+                                        "linkHoverColor": "#0000ee",
+                                        "linkUnderline": true,
+                                        "linkHoverUnderline": true
+                                    },
+                                    "hideDesktop": false,
+                                    "hideMobile": false,
+                                    "text": "<p style=\"font-size: 14px; line-height: 140%;\">&nbsp;</p>\n<p style=\"font-size: 14px; line-height: 140%;\">&nbsp;</p>\n<p style=\"font-size: 14px; line-height: 140%;\">&nbsp;</p>\n<p style=\"font-size: 14px; line-height: 140%;\">Dear {{ full_name }},&nbsp;<br /><br /></p>\n<p style=\"font-size: 14px; line-height: 140%;\">&nbsp;</p>\n<p style=\"font-size: 14px; line-height: 140%;\">&nbsp;</p>\n<p style=\"font-size: 14px; line-height: 140%;\"><br />There was an issue with your application. We will attempt to contact you via the phone number you provided. Please give us a call if we haven't reached you yet so that we can correct your application.&nbsp;<br /><br /><br /></p>\n<p style=\"font-size: 14px; line-height: 140%;\">&nbsp;</p>\n<p style=\"font-size: 14px; line-height: 140%;\">&nbsp;</p>\n<p style=\"font-size: 14px; line-height: 140%;\">Best Regards,&nbsp;<br /><br /></p>\n<p style=\"font-size: 14px; line-height: 140%;\">Redux Team<br /><br /><br /><br /><br /><br /></p>\n<p style=\"font-size: 14px; line-height: 140%;\">&nbsp;</p>"
+                                }
+                            }
+                        ],
+                        "values": {
+                            "backgroundColor": "",
+                            "padding": "0px",
+                            "border": {},
+                            "_meta": {
+                                "htmlID": "u_column_5",
+                                "htmlClassNames": "u_column"
+                            }
+                        }
+                    }
+                ],
+                "values": {
+                    "displayCondition": null,
+                    "columns": false,
+                    "backgroundColor": "",
+                    "columnsBackgroundColor": "",
+                    "backgroundImage": {
+                        "url": "https://gcmadata.s3.us-east-2.amazonaws.com/email_assets/email_background+copy.png",
+                        "width": 576,
+                        "height": 540,
+                        "fullWidth": true,
+                        "cover": false,
+                        "repeat": false,
+                        "center": true
+                    },
+                    "padding": "0px",
+                    "hideDesktop": false,
+                    "hideMobile": false,
+                    "noStackMobile": false,
+                    "_meta": {
+                        "htmlID": "u_row_5",
+                        "htmlClassNames": "u_row"
+                    },
+                    "selectable": true,
+                    "draggable": true,
+                    "duplicatable": true,
+                    "deletable": true
+                }
+            },
+            {
+                "cells": [
+                    1
+                ],
+                "columns": [
+                    {
+                        "contents": [
+                            {
+                                "type": "html",
+                                "values": {
+                                    "containerPadding": "10px 10px 83px",
+                                    "_meta": {
+                                        "htmlID": "u_content_html_1",
+                                        "htmlClassNames": "u_content_html"
+                                    },
+                                    "selectable": true,
+                                    "draggable": true,
+                                    "duplicatable": true,
+                                    "deletable": true,
+                                    "html": "<tr style=\"border-collapse:collapse\">\n              <td class=\"es-m-p0\" style=\"padding:0;Margin:0;padding-left:5px;padding-right:5px;background-color:#333333\" bgcolor=\"#333333\" align=\"left\">\n               <!--[if mso]><table style=\"width:570px\" cellpadding=\"0\" cellspacing=\"0\"><tr><td style=\"width:162px\" valign=\"top\"><![endif]-->\n               <table class=\"es-left\" cellspacing=\"0\" cellpadding=\"0\" align=\"left\" style=\"mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left\">\n                 <tbody><tr style=\"border-collapse:collapse\">\n                  <td class=\"es-m-p20b\" align=\"center\" style=\"padding:0;Margin:0;width:162px\">\n                   <table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" role=\"presentation\" style=\"mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px\">\n                     <tbody><tr style=\"border-collapse:collapse\">\n                      <td class=\"es-m-txt-c\" align=\"center\" style=\"padding:0;Margin:0;padding-left:10px;padding-right:30px;font-size:0px\"><img src=\"https://gcmadata.s3.us-east-2.amazonaws.com/email_assets/redux_email+copy.png\n\" alt=\"\" style=\"display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic\" width=\"122\" height=\"65\"></td>\n                     </tr>\n                   </tbody></table></td>\n                 </tr>\n               </tbody></table>\n               <!--[if mso]></td><td style=\"width:260px\" valign=\"top\"><![endif]-->\n               <table class=\"es-left\" cellspacing=\"0\" cellpadding=\"0\" align=\"left\" style=\"mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left\">\n                 <tbody><tr style=\"border-collapse:collapse\">\n                  <td class=\"es-m-p20b\" align=\"left\" style=\"padding:0;Margin:0;width:260px\">\n                   <table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" role=\"presentation\" style=\"mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px\">\n                     <tbody><tr style=\"border-collapse:collapse\">\n                      <td align=\"center\" style=\"padding:0;Margin:0\"><p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:12px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:15px;color:#FFFFFF\">\n                          <br>&nbsp;Contact Us: 305-504-5094<br>1900 N Bayshore Dr, 1A #131<br> Miami, FL 33132</p></td>\n                     </tr>\n                   </tbody></table></td>\n                 </tr>\n               </tbody></table>\n               <!--[if mso]></td><td style=\"width:0px\"></td><td style=\"width:70px\" valign=\"top\"><![endif]-->\n               <table class=\"es-right\" cellspacing=\"0\" cellpadding=\"0\" align=\"right\" style=\"mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left\">\n                 <tbody><tr style=\"border-collapse:collapse\">\n                  <td align=\"left\" style=\"padding:0;Margin:0;width:70px\">\n                   <table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" role=\"presentation\" style=\"mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px\">\n                     <tbody><tr style=\"border-collapse:collapse\">\n                       <td align=\"center\" style=\"padding:0;Margin:0\"><p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:12px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#FFFFFF\">\n                         <br>Follow Us:</p>\n                       </td>\n                     </tr>\n                   </tbody></table>\n                  </td>\n                 </tr>\n               </tbody></table>\n               <!--[if mso]></td><td style=\"width:0px\"></td><td style=\"width:65px\" valign=\"top\"><![endif]-->\n               <table class=\"es-right\" cellspacing=\"0\" cellpadding=\"0\" align=\"right\" style=\"mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:right\">\n                 <tbody><tr style=\"border-collapse:collapse\">\n                  <td align=\"left\" style=\"padding:0;Margin:0;width:65px\">\n                   <table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" role=\"presentation\" style=\"mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px\">\n                     <tbody><tr style=\"border-collapse:collapse\">\n                       <td align=\"center\" style=\"padding:0;Margin:0\"><p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:12px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:30px;color:#FFFFFF\"><br><a target=\"_blank\" href=\"https://www.facebook.com/Reduxpropertytaxservices/\"><img title=\"Facebook\" src=\"https://gcmadata.s3.us-east-2.amazonaws.com/email_assets/icon_facebook.png\" alt=\"Fb\" width=\"24\" height=\"24\"></a>&nbsp;\n                        <a target=\"_blank\" href=\"https://www.instagram.com/reduxpropertytaxservices/\"><img title=\"Instagram\" src=\"https://gcmadata.s3.us-east-2.amazonaws.com/email_assets/icon_insta.png\" alt=\"Inst\" width=\"24\" height=\"24\"></a>\n                      </p></td>\n                     </tr>\n                   </tbody></table>\n                  </td>\n                 </tr>\n               </tbody></table>\n               <!--[if mso]></td></tr></table><![endif]--></td>\n             </tr>",
+                                    "hideDesktop": false,
+                                    "hideMobile": false
+                                }
+                            }
+                        ],
+                        "values": {
+                            "backgroundColor": "",
+                            "padding": "0px",
+                            "border": {},
+                            "_meta": {
+                                "htmlID": "u_column_6",
+                                "htmlClassNames": "u_column"
+                            }
+                        }
+                    }
+                ],
+                "values": {
+                    "displayCondition": null,
+                    "columns": false,
+                    "backgroundColor": "",
+                    "columnsBackgroundColor": "#333333",
+                    "backgroundImage": {
+                        "url": "",
+                        "fullWidth": true,
+                        "repeat": false,
+                        "center": true,
+                        "cover": false
+                    },
+                    "padding": "0px",
+                    "hideDesktop": false,
+                    "hideMobile": false,
+                    "noStackMobile": false,
+                    "_meta": {
+                        "htmlID": "u_row_6",
+                        "htmlClassNames": "u_row"
+                    },
+                    "selectable": true,
+                    "draggable": true,
+                    "duplicatable": true,
+                    "deletable": true
+                }
+            }
+        ],
+        "values": {
+            "backgroundColor": "#ffffff",
+            "backgroundImage": {
+                "url": "",
+                "fullWidth": true,
+                "repeat": false,
+                "center": true,
+                "cover": false
+            },
+            "contentWidth": "580px",
+            "contentAlign": "center",
+            "fontFamily": {
+                "label": "Arial",
+                "value": "arial,helvetica,sans-serif"
+            },
+            "preheaderText": "",
+            "linkStyle": {
+                "body": true,
+                "linkColor": "#0000ee",
+                "linkHoverColor": "#0000ee",
+                "linkUnderline": true,
+                "linkHoverUnderline": true
+            },
+            "_meta": {
+                "htmlID": "u_body",
+                "htmlClassNames": "u_body"
+            }
+        }
+    },
+    "schemaVersion": 5
+}

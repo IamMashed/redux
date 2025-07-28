@@ -1,0 +1,156 @@
+/* Login Page Styles */
+
+html{
+	height: 100%;
+	/*background-color: #1c77ab;*/
+}
+
+body{
+	height: 100%;
+}
+
+#Wrapper{
+	background-image: url('/static/images/background-login-screen.jpg');
+	background-repeat: repeat-x;
+	background-position: fixed;
+	background-size: contain;
+	padding-top: 60px;
+	font-family: 'Karla';
+	background-color: #1c77ab;
+	overflow: auto;
+	height: 100%;
+	}
+
+.login-logo{
+	text-align: center;
+}
+
+.login-welcome-title{
+	color: #465361;
+	padding-top: 100px;
+	padding-bottom: 40px;
+}
+
+.login-welcome-title h1{
+	text-align: center;
+	font-size:  31px;
+}
+
+.login-welcome-title p{
+	text-align: center;
+}
+
+.footer-logo{
+	text-align: center;
+	padding-top: 120px;
+	text-align: center;
+}
+
+.login-logo-image{
+	width: 90px;
+	height: auto;
+}
+
+.login-logo-image--redux {
+	width: 140px;
+}
+
+.footer-logo-image{
+	width: 60px;
+	height: auto;
+}
+
+.login-base{
+	border-radius: 12px;
+	background-color: #ffffff;
+	padding: 30px;
+	border-left: 1px solid #e6eaed;
+	border-right: 1px solid #e6eaed;
+	border-bottom: 1px solid #e6eaed;
+	border-top: 4px solid #fc5226;
+}
+
+.login-base p{
+	font-size: 16px;
+	margin-bottom: 0px;
+	padding-bottom: 5px;
+}
+
+.login-base input[type=text]{
+	border-radius: 0 !important;
+	border: 1px solid #e6eaed !important;
+	-webkit-box-shadow: inset 0px 2px 5px 0px rgba(0,0,0,0.07);
+	-moz-box-shadow: inset 0px 2px 5px 0px rgba(0,0,0,0.07);
+	box-shadow: inset 0px 2px 5px 0px rgba(0,0,0,0.07);
+}
+
+.login-base input[type=text]:focus{
+	border: 1px solid #87b6e9 !important;
+	-webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.07);
+	-moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.07);
+	box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.07);
+}
+
+.login-base input[type=password]{
+	border-radius: 0 !important;
+	border: 1px solid #e6eaed !important;
+	-webkit-box-shadow: inset 0px 2px 5px 0px rgba(0,0,0,0.07);
+	-moz-box-shadow: inset 0px 2px 5px 0px rgba(0,0,0,0.07);
+	box-shadow: inset 0px 2px 5px 0px rgba(0,0,0,0.07);
+}
+
+.login-base input[type=password]:focus{
+	border: 1px solid #87b6e9 !important;
+	-webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.07);
+	-moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.07);
+	box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.07);
+}
+
+.login-base .forgotten-password a{
+	font-weight: bold;
+	text-decoration: underline;
+	color: #465361;
+	font-size: 12px;
+	float: right;
+}
+
+.login-base .forgotten-password a:hover{
+	color: #fc5226;
+}
+
+.login-base .btn{
+	margin-left: 0px;
+	margin-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+	background-color: #1dbab4;
+	border-radius: 6px !important;
+	font-weight: bold;
+	color: #ffffff;
+	border: 0px !important;
+}
+
+.login-base .btn:hover{
+	background-color: #2ddad4;
+	border: 0px !important;
+	-webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+	box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+
+}
+
+.login-footer-text{
+	padding-top: 30px;
+	text-align: center;
+	padding-bottom: 40px;
+	color: #ffffff;
+	font-size: 16px;
+	line-height: 18px;
+}
+
+.login-footer-text p.login-footer-copyright{
+	font-size: 13px;
+}

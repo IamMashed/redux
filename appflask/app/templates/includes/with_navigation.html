@@ -1,0 +1,95 @@
+{% extends "includes/base.html" %}
+
+{% block scripts %}
+<script src="{{url_for('static', filename='javascript/default.js')}}"></script>
+{{super()}}
+{% endblock %}
+
+{% block document %}
+<div class="container-fluid" style="height: 100%;">
+	<div class="row">
+
+  {% block navbar %}
+		<div class="dashboard-navigation" style="width: 180px">
+			{% if request_domain == DOMAIN.PTRC_NAME: %}
+				<img src="{{url_for('static', filename='images/logo_ptrc.png')}}">
+			{% else %}
+				<img src="{{url_for('static', filename='images/logo_redux.png')}}">
+			{% endif %}
+
+			<h2>Navigation</h2>
+
+
+				<a href="/masscma"><p><span>Mass CMA</span></p></a>
+				<a href="/"><p><span>Dashboard</span></p></a>
+				<a href="/vue/cma"><p><span>Single CMA</span></p></a>
+
+				<a href="#caseManagementMenu"
+					data-toggle="collapse"
+					role="button"
+					aria-expanded="false"
+					aria-controls="caseManagementMenu"
+					class="collapsed">
+					<p><span>Case Management</span></p>
+				</a>
+
+				<div class="collapse" id="caseManagementMenu" style="padding-right: 20px">
+					<a href="/vue/case-management/applications"><p class="text-right"><span>Case Management</span></p></a>
+					<a href="/vue/case-management/tags"><p class="text-right"><span>Tags</span></p></a>
+				</div>
+
+				<a href="#globalSettingsMenu"
+					data-toggle="collapse"
+					role="button"
+					aria-expanded="false"
+					aria-controls="globalSettingsMenu"
+					class="collapsed">
+					<p><span>Global Settings</span></p>
+				</a>
+
+				<div class="collapse" id="globalSettingsMenu" style="padding-right:20px">
+					<a href="/vue/ratios"><p class="text-right"><span>Assessment Ratios</span></p></a>
+					<a href="/vue/rule-sets"><p class="text-right"><span>Rule Sets</span></p></a>
+					<a href="/vue/time-adjustments"><p class="text-right"><span>Time Adjustments</span></p></a>
+					<a href="/vue/assessment-dates"><p class="text-right"><span>Assessment Dates</span></p></a>
+					<a href="/vue/misc-settings"><p class="text-right"><span>Misc Settings</span></p></a>
+				</div>
+
+				<a href="/vue/admin"><p><span>Admin</span></p></a>
+
+		</div>
+  {% endblock  %}
+
+  {% block user_head %}
+		<div class="col-md-10">
+			<div class="row dashboard-heading"><!-- User Heading & Page Title-->
+				<div class="col-md-7">
+                                  {% block page_title %}
+                                  <h1>Global CMA</h1>
+                                  {% endblock %}
+				</div>
+
+				<div class="col-md-5 user-controls">
+					<ul>
+						<li>Welcome Back, Jev</li>
+						<li><a href="/admin">Admin</a></li>
+						<li><a href="/logout">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+  {% endblock %}
+
+
+  {% block content %}
+  {% endblock %}
+
+  {% block copyright %}
+    {{super()}}
+  {% endblock %}
+
+		</div>
+
+	</div>
+</div>
+
+{% endblock %}

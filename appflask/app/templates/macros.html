@@ -1,0 +1,13 @@
+{% macro masscma_column(name, label, sort_info) -%}
+        <a href="
+{{ url_for('masscma.index', column_name=name, direction=sort_info.get('direction') or 'asc') }}">
+            {{ label }}
+            {% if sort_info.column_name == name %}
+                {% if sort_info.get('direction') == 'desc' %}
+                    ↓
+                {% elif sort_info.get('direction') == 'asc' %}
+                    ↑
+                {% endif %}
+            {% endif %}
+        </a>
+{%- endmacro %}

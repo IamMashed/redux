@@ -1,0 +1,9 @@
+Good Morning,
+
+This is an auto-generated Daily report of the Redux.tax website on {{ today }}.
+
+New Applications: {{ new_applications_count }}
+
+Regards,
+
+Redux Robot

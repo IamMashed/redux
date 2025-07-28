@@ -1,0 +1,17 @@
+{% extends "includes/with_navigation.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block title %}Index{% endblock %}
+
+{% block page_title %}
+    <h1>Create or Edit a Rule Set</h1>
+{% endblock %}
+
+{% block content %}
+    {{ wtf.quick_form(form) }}
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='javascript/county_town_filter.js') }}"></script>
+{% endblock %}

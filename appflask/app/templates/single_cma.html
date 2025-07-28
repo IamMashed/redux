@@ -1,0 +1,232 @@
+{% extends "includes/with_navigation.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block page_title %}
+<h1>Single CMA</h1>
+{% endblock %}
+
+{% macro property_print(property) -%}
+<table width="100%" class="data-table">
+						<tr>
+							<td class="table-content" style="text-align: center;">{{property.title}}</td>
+						</tr>
+						<tr>
+							<td>
+								<table width="100%">
+									<tr>
+									<td width="33%" class="table-label"style="background:#ebf2f6 !important;border-right: 1px solid white;text-align: center;">SEC</td><td width="33%" class="table-label"style="background:#ebf2f6 !important;border-right: 1px solid white;text-align: center;">BLOCK</td><td width="33%" class="table-label"style="background:#ebf2f6 !important;border-right: 1px solid white;text-align: center;">LOT</td>
+									</tr>
+									<tr>
+									<td width="33%" class="table-content"style="background:#ebf2f6 !important;border-right: 1px solid white;text-align: center;">{{property.section}}</td><td width="33%" class="table-content"style="background:#ebf2f6 !important;border-right: 1px solid white;text-align: center;">{{property.block}}</td><td width="33%" class="table-content"style="background:#ebf2f6 !important;border-right: 1px solid white;text-align: center;">{{property.lot}}</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td class="table-content">{{property.address}}</td>
+						</tr>
+						<tr>
+							<td class="table-content">{{property.proximity}}</td>
+						</tr>
+						<tr>
+							<td class="table-content">{{property.school}}</td>
+						</tr>
+						<tr>
+							<td class="table-content">{{property.property_class}}</td>
+						</tr>
+						<tr>
+							<td class="table-content">{{property.sale_price}}</td>
+						</tr>
+						<tr>
+							<td>
+								<table width="100%">
+									<tr>
+										<td width="50%" class="table-label" style="background:#ebf2f6 !important;border-right: 1px solid white;">Description</td> <td width="50%" class="table-label" style="background:#ebf2f6 !important;">+/- Adj</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td class="table-content">{{property.sale_date}}</td>
+						</tr>
+						<tr>
+							<td class="table-content">{{property.age}}</td>
+						</tr>
+						<tr>
+							<td class="table-content">{{property.style}}</td>
+						</tr>
+						<tr>
+							<td class="table-content">{{property.price_per_sqft}}</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<table width="100%">
+									{% for adjustment in property.adjustments %}
+									<tr>
+										
+										<td width="50%" class="table-content" style="background:#ebf2f6 !important; border-right: 1px solid white;">{{adjustment.value}}</td> <td width="50%" class="table-content" style="background:#ebf2f6 !important;">{{adjustment.adjusted}}</td>
+										
+									</tr>
+									{% endfor %}
+								</table>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="table-content">{{property.net_adjusted}}</td>
+						</tr>
+						<tr>
+							<td class="table-content">{{property.net_adjusted_value}}</td>
+						</tr>
+						
+					</table>
+					{%- endmacro %}
+
+
+
+{% block content %}
+<div style="background: #ffffff; margin-left: -15px; margin-right: -15px;">
+
+
+<div class="col-md-12 single-cma">
+	
+	<h2>Displaying Single CMA for property id: {{ property_id }}</h2>
+	
+	<div style="overflow-x: auto;" class="single-cma-table" >
+		
+		<table width="100%">
+			<tr>
+				
+				<td>
+					<table>
+						<tr>
+							<td class="table-label">Property Title</td>
+						</tr>
+						<tr>
+							<td class="table-label">Comparables</td>
+						</tr>
+						<tr>
+							<td class="table-label">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="table-label">Address</td>
+						</tr>
+						<tr>
+							<td class="table-label">Proximity</td>
+						</tr>
+						<tr>
+							<td class="table-label">School Dist</td>
+						</tr>
+						<tr>
+							<td class="table-label">Class</td>
+						</tr>
+						<tr>
+							<td class="table-label">Sales Price</td>
+						</tr>
+						<tr>
+							<td>
+							<table width="100%">
+									<tr>
+										<td width="50%" class="table-label">&nbsp;</td> <td width="50%" class="table-label"></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td class="table-label">Date</td>
+						</tr>
+						<tr>
+							<td class="table-label">Age</td>
+						</tr>
+						<tr>
+							<td class="table-label">Style</td>
+						</tr>
+						<tr>
+							<td class="table-label">GLA (SF)</td>
+						</tr>
+						<tr>
+							<td class="table-label">Waterfront</td>
+						</tr>
+						<tr>
+							<td class="table-label">Baths</td>
+						</tr>
+						<tr>
+							<td class="table-label">Garage</td>
+						</tr>
+						<tr>
+							<td class="table-label">Basement</td>
+						</tr>
+						<tr>
+							<td class="table-label">Price Per Square Foot</td>
+						</tr>
+						<tr>
+							<td class="table-label">Lot Size</td>
+						</tr>
+						<tr>
+							<td class="table-label">Location</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="table-label">Net Adj.</td>
+						</tr>
+						<tr>
+							<td class="table-label">Net Adj. Value</td>
+						</tr>
+					</table>
+				</td>
+				
+				<td>
+					<table width="100%">
+						<tr>
+							<td>
+					{{ property_print(subject_property) }}
+							</td>
+						</tr>
+					</table>
+				</td>
+				
+				{% for comp in comp_properties %}
+				<td>
+					<table width="100%">
+						<tr>
+							<td>
+					{{ property_print(comp) }}
+							</td>
+						</tr>
+					</table>
+				</td>
+				{% endfor %}
+			</tr>
+		</table>
+		
+		
+		<div class="row results-data">
+			<div class="col-md-3 results-labels">
+				<div>RESULTS:</div>
+				<div>CURRENT ASSESSMENT:</div>
+				<div>CURRENT MARKET VALUE:</div>
+				<div>REQUESTED NEW ASSESSMENT:</div>
+				<div>CLAIMED MARKET VALUE:</div>
+			</div>
+			<div class="col-md-9 results-figures">
+				<div>&nbsp;</div>
+				<div>{{ assessment_results.current_assessment }}</div>
+				<div>{{ assessment_results.current_market }}</div>
+				<div>{{ assessment_results.new_assessment }}</div>
+				<div>{{ assessment_results.new_market }}</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+
+</div>
+

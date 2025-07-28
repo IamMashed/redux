@@ -1,0 +1,21 @@
+Sample database dumps that can be used for the development purposes - to fill the database for basic functionality.
+
+File names of the sample SQLs are indicate to the GIT hash they belong to.
+If you want to load the SQL to the database, the best is to:
+- checkout the specified GIT commit
+- re-create the database using manage.py db recreate
+- execute the SQL file against your database
+- Then feel free to checkout latest commit and do `flask db upgrade` to migrate the structure to the latest version
+
+
+# To create a new sample database dump, please use this command:
+pg_dump -O -x -U USERNAME -h 127.0.0.1 DATABASENAME > CURRENT_COMMIT_HASH.sql
+The -O and -x parameters are required to omit the SQL OWNER statements.
+
+- in case of error:
+ ERROR [root] Error: Multiple head revisions are present for given argument 'head'; please specify a specific target revision, '<branchname>@head' to narrow to a specific head, or 'heads' for all heads
+
+$ flask db merge heads
+$ flask db upgrade
+
+and please commit the latest migrations script to the repo.

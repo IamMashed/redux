@@ -1,0 +1,84 @@
+# English translations for PROJECT.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-11-20 13:59+0200\n"
+"PO-Revision-Date: 2019-11-20 13:59+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: app/blueprints/admin/admin.py:49
+msgid "Email required"
+msgstr ""
+
+#: app/blueprints/admin/admin.py:53
+msgid "Password required"
+msgstr ""
+
+#: app/blueprints/admin/admin.py:57 app/blueprints/admin/admin.py:107
+msgid "Confirm password False"
+msgstr ""
+
+#: app/templates/bootstrap/index.html:30
+msgid "Test Babel"
+msgstr ""
+
+#: app/templates/bootstrap/index.html:31
+msgid "Hello, Bootstrap. This is index page"
+msgstr ""
+
+#: app/templates/bootstrap/index.html:32
+msgid "Current user email"
+msgstr ""
+
+#: app/templates/security/login.html:20
+msgid "Welcome, Guest!"
+msgstr "Welcome, Dear Guest!"
+
+#: app/templates/security/login.html:21
+msgid "Enter your credentials below to login:"
+msgstr ""
+
+#: app/templates/security/login.html:35
+msgid "email address"
+msgstr ""
+
+#: app/templates/security/login.html:38
+msgid "password"
+msgstr ""
+
+#: app/templates/security/login.html:67
+msgid "191 Patchen Avenue, Brooklyn NY 11233"
+msgstr ""
+
+#: app/templates/security/login.html:68
+msgid "(718) 823-8500"
+msgstr ""
+
+#: app/templates/security/login.html:69
+msgid "info@arbiedevelopment.com"
+msgstr ""
+
+#: app/templates/security/login.html:72
+msgid "Copyright 2019 Arbie Development."
+msgstr ""
+
+#: app/utils/utils.py:9
+msgid "Please log in to access this page."
+msgstr ""
+
+#: app/utils/utils.py:18
+msgid "Access denied"
+msgstr ""
+

@@ -1,0 +1,107 @@
+{% extends "includes/base.html" %}
+
+## We do not display flash messages
+## iteration stays here to clean up the flashed messages list
+{% block flash %}
+{% for message in get_flashed_messages() %}
+{% endfor %}
+{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div id="Wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 login-logo">
+				{% if request_domain == DOMAIN.PTRC_NAME: %}
+					<img src="{{url_for('static', filename='images/logo_ptrc.png')}}" class="login-logo-image">
+				{% else %}
+					<img src="{{url_for('static', filename='images/logo_redux_dark.png')}}" class="login-logo-image login-logo-image--redux">
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	
+		<div class="container">
+		<div class="row">
+			<div class="col-md-12 login-welcome-title">
+				<h1>Welcome, Guest!</h1>
+				<p>Enter your credentials below to login:</p>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				
+			</div>
+			<div class="col-md-6 login-base">
+				<form action="{{ url_for_security('login') }}" method="POST" name="login_form" class="form">
+					    {{ login_user_form.hidden_tag() }}
+					    <div class="form-group">
+							<p>Username:</p>
+					        {{ login_user_form.email(class='form-control') }}
+					    </div>
+					    <div class="form-group">
+						    <p>Password:</p>
+					        {{ login_user_form.password(class='form-control') }}
+					    </div>
+					    <div class="form-group">
+					
+					            <div class="row">
+						            <div class="col-sm-6">
+							            <div class="checkbox">
+					                <label>
+					                    {{ login_user_form.remember }} Remember my details
+					                </label>
+					            </div>
+					            {{ login_user_form.submit(class='btn btn-primary pull-right') }}
+
+						            </div>
+						
+						            <div class="col-sm-6 forgotten-password">
+							            <a href="#">I have forgotten my details</a>
+						            </div>
+					            </div>					
+					    </div>
+					
+					
+					</form>
+			</div>
+			<div class="col-md-3">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 footer-logo">
+				{% if request_domain == DOMAIN.PTRC_NAME: %}
+					<img src="{{url_for('static', filename='images/logo_ptrc.png')}}" class="footer-logo-image">
+				{% else %}
+					<img src="{{url_for('static', filename='images/logo_redux.png')}}" class="footer-logo-image">
+				{% endif %}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 login-footer-text">
+				<p>191 Patchen Avenue, Brooklyn NY 11233<br/>
+					(718) 823-8500<br/>
+					info@arbiedevelopment.com</p>
+				
+				<p class="login-footer-copyright">
+					&copy; Copyright 2019 Arbie Development.
+				</p>
+			</div>
+		</div>
+	</div>
+	
+</div>
+{% endblock %}
+## We already have our own copyright at login page
+{% block copyright %}
+{% endblock %}

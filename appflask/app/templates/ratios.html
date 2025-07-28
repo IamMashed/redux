@@ -1,0 +1,739 @@
+{% extends "includes/with_navigation.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block page_title %}
+<h1>Ratios</h1>
+{% endblock %}
+
+{% block content %}
+{% raw %}
+
+<style>
+
+.ratiosTop {
+
+}
+
+.ratiosInput{
+  width: 80px;
+  text-align: center;
+}
+
+.button-ratios{
+	float: right;
+  margin-left: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+	background-color: #1dbab4;
+	border-radius: 6px !important;
+	font-weight: bold;
+	color: #ffffff;
+	border: 0px !important;
+	font-size: 12px;
+}
+
+
+.button-ratios:hover{
+	text-decoration: none !important;
+	background-color: #2ddad4;
+	border: 0px !important;
+	-webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+	box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.15);
+}
+
+
+
+</style>
+
+<div class="dashboard-data col-md-12"  id="ratiosList" data-equalizer>
+
+  <form v-on:submit="saveData">
+    <div class="row">
+      <div class="col-md-8">
+        <h2>Suffolk</h2>
+      </div>
+      
+      <div class="col-md-4">
+            <button class="button-ratios" type='button' v-if="state === 'default'" v-on:click="changeState('edit')">Edit</button>  
+            <button class="button-ratios" type='button' v-if="state === 'edit'" v-on:click="cancelEdit(newValue)">Cancel</button>
+            <input class="button-ratios"  type='submit' v-if="state === 'edit'" value='Save'/>            
+      </div>
+    </div>
+ <!--    
+   <div>{{ ratios }}</div>
+   
+  <div style="overflow-x: auto;"class="rule-set-table">
+        <table>
+            <tr class="top-row ratiosTop">
+              <td class="top-row-ratios" v-for="column in inputs[0].data[0].columns">
+                 {{ column.name }}
+              </td>
+            </tr>
+            
+            <template v-for="row in inputs[0].data">
+              <tr>
+              <template v-for="cell in row.columns">
+                <td><input class="ratiosInput" type="text" v-model="cell.value" v-bind:disabled="isDisabled(cell)"/></td>
+              </template>
+              </tr>
+            </template>
+        </table>
+      </div>
+-->
+      
+      
+    <div style="overflow-x: auto;"class="rule-set-table">
+      <table>
+        <template v-for="ratio in ratios">
+          <tr class="top-row ratiosTop">
+            <template v-for="header in headers">
+              <td>{{ header }}</td>
+            </template>
+            
+          </tr>
+         
+          <tr>
+            <td>{{ ratio.town }}</td>
+            <td>{{ ratio.district }}</td>
+            <template v-for="cell in ratio.columns">
+              <td><input class="ratiosInput" type="text" v-model="cell.value" v-bind:disabled="isDisabled(cell)"/></td>
+            </template>
+          </tr>
+        </template>
+      </table>
+    </div> 
+  </form> 
+</div>
+      
+
+
+<script>
+
+
+function getDefaultData() {
+    return {
+            value: '',
+            info: null,
+            ratios: null,
+            all_years: null,
+            static_headers: ["Township", "District"],
+            headers: [],
+            newValue: '',
+            cachedValue: '',
+            state: 'default',
+            inputs: [
+    { "country": "Suffolk",
+    "data": 
+    [
+    {
+    "id": 1,
+    "name": "Babylon",
+    "district": "100",
+    "columns": [
+      {
+        "name": "Town",
+        "value": "Babylon",
+        "disabled": true
+      },
+      {
+        "name": "District",
+        "value": "100",
+        "disabled": true
+      },
+      {
+        "name": "2019",
+        "value": "0.97"
+      },
+      {
+        "name": "2018",
+        "value": "1.07"
+      },
+      {
+        "name": "2017",
+        "value": "1.12"
+      },
+      {
+        "name": "2016",
+        "value": "1.18"
+      },
+      {
+        "name": "2015",
+        "value": "1.19"
+      },
+      {
+        "name": "2014",
+        "value": "1.25"
+      },
+      {
+        "name": "2013",
+        "value": "1.23"
+      },
+      {
+        "name": "2012",
+        "value": "1.13"
+      },
+      {
+        "name": "2011",
+        "value": "1.05"
+      },
+    ]
+  },
+  {
+    "id": 2,
+    "columns": [
+      {
+        "name": "Town",
+        "value": "Brookhaven",
+        "disabled": true
+      },
+      {
+        "name": "District",
+        "value": "200",
+        "disabled": true
+      },
+      {
+        "name": "2019",
+        "value": "0.79"
+      },
+      {
+        "name": "2018",
+        "value": "0.86"
+      },
+      {
+        "name": "2017",
+        "value": "0.9"
+      },
+      {
+        "name": "2016",
+        "value": "0.91"
+      },
+      {
+        "name": "2015",
+        "value": "0.95"
+      },
+      {
+        "name": "2014",
+        "value": "0.95"
+      },
+      {
+        "name": "2013",
+        "value": "0.95"
+      },
+      {
+        "name": "2012",
+        "value": "0.9"
+      },
+      {
+        "name": "2011",
+        "value": "0.87"
+      },
+    ]
+  },
+  {
+    "id": 3,
+    "columns": [
+      {
+        "name": "Town",
+        "value": "East Hampton",
+        "disabled": true
+      },
+      {
+        "name": "District",
+        "value": "300",
+        "disabled": true
+      },
+      {
+        "name": "2019",
+        "value": "0.56"
+      },
+      {
+        "name": "2018",
+        "value": "0.58"
+      },
+      {
+        "name": "2017",
+        "value": "0.57"
+      },
+      {
+        "name": "2016",
+        "value": "0.59"
+      },
+      {
+        "name": "2015",
+        "value": "0.64"
+      },
+      {
+        "name": "2014",
+        "value": "0.73"
+      },
+      {
+        "name": "2013",
+        "value": "0.73"
+      },
+      {
+        "name": "2012",
+        "value": "0.76"
+      },
+      {
+        "name": "2011",
+        "value": "0.74"
+      },
+    ]
+  },
+  {
+    "id": 4,
+    "columns": [
+      {
+        "name": "Town",
+        "value": "Huntington",
+        "disabled": true
+      },
+      {
+        "name": "District",
+        "value": "400",
+        "disabled": true
+      },
+      {
+        "name": "2019",
+        "value": "0.65"
+      },
+      {
+        "name": "2018",
+        "value": "0.69"
+      },
+      {
+        "name": "2017",
+        "value": "0.71"
+      },
+      {
+        "name": "2016",
+        "value": "0.73"
+      },
+      {
+        "name": "2015",
+        "value": "0.73"
+      },
+      {
+        "name": "2014",
+        "value": "0.77"
+      },
+      {
+        "name": "2013",
+        "value": "0.79"
+      },
+      {
+        "name": "2012",
+        "value": "0.77"
+      },
+      {
+        "name": "2011",
+        "value": "0.75"
+      },
+    ]
+  },
+  {
+    "id": 5,
+    "columns": [
+      {
+        "name": "Town",
+        "value": "Islip",
+        "disabled": true
+      },
+      {
+        "name": "District",
+        "value": "500",
+        "disabled": true
+      },
+      {
+        "name": "2019",
+        "value": "10.77"
+      },
+      {
+        "name": "2018",
+        "value": "11.35"
+      },
+      {
+        "name": "2017",
+        "value": "12.12"
+      },
+      {
+        "name": "2016",
+        "value": "12.7"
+      },
+      {
+        "name": "2015",
+        "value": "12.7"
+      },
+      {
+        "name": "2014",
+        "value": "13.2"
+      },
+      {
+        "name": "2013",
+        "value": "13.2"
+      },
+      {
+        "name": "2012",
+        "value": "12.38"
+      },
+      {
+        "name": "2011",
+        "value": "11.37"
+      },
+    ]
+  },
+  {
+    "id": 6,
+    "columns": [
+      {
+        "name": "Town",
+        "value": "Riverhead",
+        "disabled": true
+      },
+      {
+        "name": "District",
+        "value": "600",
+        "disabled": true
+      },
+      {
+        "name": "2019",
+        "value": "12.35"
+      },
+      {
+        "name": "2018",
+        "value": "13.52"
+      },
+      {
+        "name": "2017",
+        "value": "13.87"
+      },
+      {
+        "name": "2016",
+        "value": "14.66"
+      },
+      {
+        "name": "2015",
+        "value": "14.58"
+      },
+      {
+        "name": "2014",
+        "value": "15.4"
+      },
+      {
+        "name": "2013",
+        "value": "15.98"
+      },
+      {
+        "name": "2012",
+        "value": "14.02"
+      },
+      {
+        "name": "2011",
+        "value": "14.23"
+      },
+    ]
+  },
+  {
+    "id": 7,
+    "columns": [
+      {
+        "name": "Town",
+        "value": "Smithtown",
+        "disabled": true
+      },
+      {
+        "name": "District",
+        "value": "800",
+        "disabled": true
+      },
+      {
+        "name": "2019",
+        "value": "1.16"
+      },
+      {
+        "name": "2018",
+        "value": "1.23"
+      },
+      {
+        "name": "2017",
+        "value": "1.31"
+      },
+      {
+        "name": "2016",
+        "value": "1.32"
+      },
+      {
+        "name": "2015",
+        "value": "1.3"
+      },
+      {
+        "name": "2014",
+        "value": "1.37"
+      },
+      {
+        "name": "2013",
+        "value": "1.37"
+      },
+      {
+        "name": "2012",
+        "value": "1.28"
+      },
+      {
+        "name": "2011",
+        "value": "1.23"
+      },
+    ]
+  },
+  {
+    "id": 8,
+    "columns": [
+      {
+        "name": "Town",
+        "value": "Southampton",
+        "disabled": true
+      },
+      {
+        "name": "District",
+        "value": "900",
+        "disabled": true
+      },
+      {
+        "name": "2019",
+        "value": "1"
+      },
+      {
+        "name": "2018",
+        "value": "1"
+      },
+      {
+        "name": "2017",
+        "value": "1"
+      },
+      {
+        "name": "2016",
+        "value": "1"
+      },
+      {
+        "name": "2015",
+        "value": "1"
+      },
+      {
+        "name": "2014",
+        "value": "1"
+      },
+      {
+        "name": "2013",
+        "value": "1"
+      },
+      {
+        "name": "2012",
+        "value": "1"
+      },
+      {
+        "name": "2011",
+        "value": "1"
+      },
+    ]
+  },
+  {
+    "id": 9,
+    "columns": [
+      {
+        "name": "Town",
+        "value": "Southold",
+        "disabled": true
+      },
+      {
+        "name": "District",
+        "value": "1000",
+        "disabled": true
+      },
+      {
+        "name": "2019",
+        "value": "0.93"
+      },
+      {
+        "name": "2018",
+        "value": "0.94"
+      },
+      {
+        "name": "2017",
+        "value": "1.01"
+      },
+      {
+        "name": "2016",
+        "value": "1.08"
+      },
+      {
+        "name": "2015",
+        "value": "1.1"
+      },
+      {
+        "name": "2014",
+        "value": "1.17"
+      },
+      {
+        "name": "2013",
+        "value": "1.18"
+      },
+      {
+        "name": "2012",
+        "value": "1.11"
+      },
+      {
+        "name": "2011",
+        "value": "1.07"
+      },
+    ]
+  },
+  ],
+  },
+  { "name": "NassauRatios",
+  "data": 
+  [
+  {
+    "id": 1,
+    "columns": [
+      {
+        "name": "Nassau",
+        "value": "Nassau first level ARC",
+        "disabled": true
+      },
+      {
+        "name": "2021",
+        "value": "0.0010",
+      },
+      {
+        "name": "2020",
+        "value": "0.0014"
+      },
+      {
+        "name": "2019",
+        "value": "0.0015"
+      },
+      {
+        "name": "2018",
+        "value": "0.0016"
+      },
+      {
+        "name": "2017",
+        "value": "0.0017"
+      },
+    ]
+  },
+  {
+    "id": 2,
+    "columns": [
+      {
+        "name": "Nassau",
+        "value": "Nassau second level SCAR",
+        "disabled": true
+      },
+      {
+        "name": "2021",
+        "value": "not set",
+      },
+      {
+        "name": "2020",
+        "value": "0.0015"
+      },
+      {
+        "name": "2019",
+        "value": "0.0017"
+      },
+      {
+        "name": "2018",
+        "value": "0.0018"
+      },
+      {
+        "name": "2017",
+        "value": "0.0017"
+      },
+    ]
+  },
+  ],
+  },
+]
+}
+}
+
+new Vue({
+        el: '#ratiosList',
+        data: getDefaultData,
+            
+        
+        methods: {
+          changeState: function (newState) {
+            this.state = newState;
+          },
+          saveEdit: function(newValue){
+            this.cachedValue = newValue.value;
+          },
+          cancelEdit: function(newValue){
+            newValue.value = this.cachedValue;
+            Object.assign(this.$data, this.$options.data.apply(this));
+            this.state = 'default';
+          },
+          isDisabled: function(cell)  {
+              return (this.state === 'default') || cell.disabled;
+              //(state === 'default') || column.disabled
+          },
+          saveData: function(e) {
+            this.state = 'default';
+            e.preventDefault();
+            
+            let currentObj = this;
+            axios.post('http://127.0.0.1:5000/yourPostApi', this.inputs)
+            .then(function (response) {
+                currentObj.output = response.data;
+            })
+            .catch(function (error) {
+                currentObj.output = error;
+            });
+          },
+          loadData: function(response)  {
+            ratiosData = response.data;
+            convertedData = [];
+            for(var i=0; i<ratiosData.length;i++) {
+              line = {};
+              line['id']=ratiosData[i]['id'];
+              line['town'] = ratiosData[i]['name'];
+              line['district'] = ratiosData[i]['description'];
+              line['columns'] = ratiosData[i]['ratios'];
+              convertedData.push(line);
+            }
+            this.ratios = convertedData;
+            // this.headers = ["Township", "District", 2019, 2018, 2017];
+            //var yearCell = ;
+           // console.log(yearCell);
+            //let static_headers = ["Township", "District"];
+           // let all_years = ["2019", "2018"];
+            //let headers1 = static_headers.concat(all_years);
+           // this.headers = headers1;
+          }
+        },
+        
+        mounted () {
+          axios
+            .get('http://127.0.0.1:5000/api/ratios')
+            .then(this.loadData)
+        }
+});
+  
+</script>
+
+
+{% endraw %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{% endblock %}
+

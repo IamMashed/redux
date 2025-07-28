@@ -1,0 +1,204 @@
+{% extends "includes/with_navigation.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block page_title %}
+<h1>Case Management </h1>
+{% endblock %}
+
+{% block content %}
+
+<div class="case-management-wrapper">
+
+<div class="row">
+	            
+    <div class="col-md-10 search">
+		<label>Client Search:</label><input type="text"><input type="image" src="{{url_for('static', filename='images/search.png')}}">
+    </div>
+    
+    <div class="col-md-2">
+	    <span class="add-client">
+		    <a href="#">Add Client</a>
+	    </span>
+    </div>
+                
+</div>
+
+<div class="row">
+	
+	<div class="col-md-12">
+		<div class=" announcement">
+			<div class="announcement-message"><img src="{{url_for('static', filename='images/announce.png')}}">Deadline is approaching for this case. Please act now.</div>
+		</div>
+	</div>
+	
+</div>
+
+<div class="row"><!--Outer-->
+	
+	<div class="col-md-12"><!--Outer-->
+		<div class="mass-cma-controls">
+			<div class="row"><!--Mass CMA-->
+				
+					<div class="col-md-4">
+						<h2>Mass CMA</h2>
+					</div>
+					
+					<div class="col-md-8" style="text-align: right;">
+						<ul>
+							<li><a href="#">Generate CMA</a></li>
+							<li><a href="#">Export to PDF</a></li>
+							<li><a href="#">Email PDF to County</a></li>
+						</ul>
+					</div>
+				
+			</div>
+		</div>
+		
+		<div class="row"><!--Tabs-->
+			<div class="col-md-12">
+				
+				<div class="case-info-tabs">
+						<ul class="nav nav-tabs">
+						  <li class="active"><a data-toggle="tab" href="#caseinfo">Case Info</a></li>
+						  <li><a data-toggle="tab" href="#propertyinfo">Property Info</a></li>
+						  <li><a data-toggle="tab" href="#admin">Admin</a></li>
+						  <li><a data-toggle="tab" href="#billing">Billing</a></li>
+						  <li><a data-toggle="tab" href="#takeover">Takeover</a></li>
+						  <li><a data-toggle="tab" href="#collection">Collection</a></li>
+						</ul>
+						
+						<div class="tab-content">
+							
+						  <div id="caseinfo" class="tab-pane fade show active">
+							  <div class="tab-content-data">
+							    <h3>HOME</h3>
+							    <p>Some content.</p>
+							  </div>
+						  </div>
+						  <div id="propertyinfo" class="tab-pane fade">
+						    <div class="tab-content-data">
+							    <h3>HOME</h3>
+							    <p>Some content.</p>
+							  </div>
+						  </div>
+						  <div id="admin" class="tab-pane fade">
+						    <div class="tab-content-data">
+							    <h3>HOME</h3>
+							    <p>Some content.</p>
+							  </div>
+						  </div>
+						  <div id="billing" class="tab-pane fade">
+						    <div class="tab-content-data">
+							    <h3>HOME</h3>
+							    <p>Some content.</p>
+							  </div>
+						  </div>
+						  <div id="takeover" class="tab-pane fade">
+						    <div class="tab-content-data">
+							    <h3>HOME</h3>
+							    <p>Some content.</p>
+							  </div>
+						  </div>
+						  <div id="collection" class="tab-pane fade">
+						    <div class="tab-content-data">
+							    <h3>HOME</h3>
+							    <p>Some content.</p>
+							  </div>
+						  </div>
+						  
+						</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row"><!--Tabs-->
+			<div class="col-md-12">
+				
+					<div class="location-tabs">
+						<ul class="nav nav-tabs">
+						  <li class="active"><a data-toggle="tab" href="#town">Town</a></li>
+						  <li><a data-toggle="tab" href="#village">Village</a></li>
+						  <li><a data-toggle="tab" href="#appraisals">Appraisals</a></li>
+						</ul>
+						
+						<div class="tab-content">
+							
+						  <div id="town" class="tab-pane fade show active">
+						    <div class="tab-content-data">
+							    <h3>HOME</h3>
+							    <p>Some content.</p>
+							  </div>
+						  </div>
+						  <div id="village" class="tab-pane fade">
+						    <div class="tab-content-data">
+							    <h3>HOME</h3>
+							    <p>Some content.</p>
+							  </div>
+						  </div>
+						  <div id="appraisals" class="tab-pane fade">
+						    <div class="tab-content-data">
+							    <h3>HOME</h3>
+							    <p>Some content.</p>
+							  </div>
+						  </div>
+						  
+						</div>
+					</div>
+			</div>
+		</div>
+		
+		<div class="row"><!--Map-->
+		
+			<div class="col-md-7">
+				<div class="map-placeholder">
+					Map
+				</div>
+			</div>
+			
+			<div class="col-md-5">
+				<div class="inventory-container">
+					Inventory
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="row"><!--Row-->
+		
+			<div class="col-md-12">
+				<div class="generate-report">
+					
+					<div class="row">
+						<div class="col-sm-5">
+							<h2>Generate Good / Bad Report</h2>
+						</div>
+						
+						<div class="col-sm-7" style="text-align: right;">
+							<ul>
+							<li><a href="#">Generate Short Report</a></li>
+							<li><a href="#">Generate Long report</a></li>
+						</ul>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="view-rule-set">
+					<span class="add-client">
+					    <a href="#">View Rule Set</a>
+				    </span>
+				</div>
+			</div>
+		
+		</div>
+		
+	</div>
+	
+</div>
+
+</div>
+
+{% endblock %}
